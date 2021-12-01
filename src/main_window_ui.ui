@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="font">
+   <font>
+    <family>DejaVu Sans</family>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>滤波器设计器</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>相位响应</string>
+      </property>
+      <widget class="PlotWidget" name="phaseResponse">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>411</width>
+         <height>321</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QGroupBox" name="ana">
+      <property name="title">
+       <string>幅值响应</string>
+      </property>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>511</x>
+         <y>33</y>
+         <width>16</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="Line" name="line">
+       <property name="geometry">
+        <rect>
+         <x>1017</x>
+         <y>21</y>
+         <width>16</width>
+         <height>309</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+      <widget class="PlotWidget" name="amplitudeResponse">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>421</width>
+         <height>321</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QGroupBox" name="design">
+      <property name="font">
+       <font>
+        <family>DejaVu Sans</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="title">
+       <string>设计滤波器</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="1">
+        <widget class="QGroupBox" name="optionalSet">
+         <property name="title">
+          <string>可选参数</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="1">
+           <widget class="QComboBox" name="windowTypeInput">
+            <item>
+             <property name="text">
+              <string>Kaiser</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>矩形窗</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hann</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Hamming</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Blackman</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="windowTypeLabel">
+            <property name="text">
+             <string>窗</string>
+            </property>
+            <property name="buddy">
+             <cstring>windowTypeInput</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="betaInput">
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.050000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="betaLabel">
+            <property name="text">
+             <string>Kaiser β</string>
+            </property>
+            <property name="buddy">
+             <cstring>betaInput</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="scaleInput">
+            <property name="text">
+             <string>缩放通带</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QGroupBox" name="fSet">
+         <property name="title">
+          <string>频率设定</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="8" column="0">
+           <widget class="QLabel" name="fe3Label">
+            <property name="text">
+             <string>边缘值3</string>
+            </property>
+            <property name="buddy">
+             <cstring>fe3Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="fsLabel">
+            <property name="text">
+             <string>采样频率</string>
+            </property>
+            <property name="buddy">
+             <cstring>fsInput</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QSpinBox" name="fe4Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>1600</number>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QSpinBox" name="fe1Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>160</number>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QSpinBox" name="fe3Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>1500</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="fc2Label">
+            <property name="text">
+             <string>截止频率2</string>
+            </property>
+            <property name="buddy">
+             <cstring>fc2Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="fc1Label">
+            <property name="text">
+             <string>截止频率1</string>
+            </property>
+            <property name="buddy">
+             <cstring>fc1Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="fc2Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>1000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="fe4Label">
+            <property name="text">
+             <string>边缘值4</string>
+            </property>
+            <property name="buddy">
+             <cstring>fe4Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="fe1Label">
+            <property name="text">
+             <string>边缘值1</string>
+            </property>
+            <property name="buddy">
+             <cstring>fe1Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="fe2Label">
+            <property name="text">
+             <string>边缘值2</string>
+            </property>
+            <property name="buddy">
+             <cstring>fe2Input</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="fsInput">
+            <property name="maximum">
+             <number>100000</number>
+            </property>
+            <property name="value">
+             <number>8000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelForFUnit">
+            <property name="text">
+             <string>单位</string>
+            </property>
+            <property name="buddy">
+             <cstring>fUnitSelect</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="fUnitSelect">
+            <item>
+             <property name="text">
+              <string>Hz</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QSpinBox" name="fe2Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>240</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="fc1Input">
+            <property name="maximum">
+             <number>4000</number>
+            </property>
+            <property name="value">
+             <number>200</number>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="feLabel">
+            <property name="text">
+             <string>通带/阻带边缘频率</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QGroupBox" name="aSet">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>幅值设定</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="2" column="0">
+           <widget class="QLabel" name="rpLabel">
+            <property name="text">
+             <string>通带最大损耗</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="aUnitSelect">
+            <item>
+             <property name="text">
+              <string>dB</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="rsInput">
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>60</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelForAUnit">
+            <property name="text">
+             <string>单位</string>
+            </property>
+            <property name="buddy">
+             <cstring>aUnitSelect</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="rsLabel">
+            <property name="text">
+             <string>阻带最小衰减</string>
+            </property>
+            <property name="buddy">
+             <cstring>rsInput</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="rpInput">
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>基本参数</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="2" column="2">
+           <widget class="QLabel" name="orderTypeLabel">
+            <property name="text">
+             <string>阶数</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QComboBox" name="orderTypeInput">
+            <item>
+             <property name="text">
+              <string>指定阶数</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>最小阶数</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="responseTypeLabel">
+            <property name="text">
+             <string>响应类型</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QComboBox" name="designMethodInput">
+            <item>
+             <property name="text">
+              <string>ButterWorth</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Chebyshev I </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Chebyshev II </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cauer/elliptic</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Window</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QSpinBox" name="orderInput">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+            <property name="value">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="impulseResponseTypeLabel">
+            <property name="text">
+             <string>IIR</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="designMethodLabel">
+            <property name="text">
+             <string>设计方法</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QComboBox" name="responseTypeInput">
+            <item>
+             <property name="text">
+              <string>低通</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>高通</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>带通</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>带阻</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QPushButton" name="doDesign">
+            <property name="text">
+             <string>设计</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="5">
+           <widget class="QPushButton" name="doTest">
+            <property name="text">
+             <string>测试</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="info">
+      <property name="title">
+       <string>滤波器信息</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>441</width>
+         <height>321</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>DejaVu Sans</family>
+         <pointsize>8</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>439</width>
+          <height>319</height>
+         </rect>
+        </property>
+        <widget class="QLabel" name="orderResultLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>30</y>
+           <width>381</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>请先设计滤波器</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_3">
+         <property name="geometry">
+          <rect>
+           <x>9</x>
+           <y>30</y>
+           <width>51</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>DejaVu Sans</family>
+           <pointsize>8</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>阶数</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>110</y>
+           <width>31</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>DejaVu Sans</family>
+           <pointsize>8</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>优点</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="goodLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>80</y>
+           <width>331</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>请先设计滤波器</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_4">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>24</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>缺点</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>270</y>
+           <width>24</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>特性</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="badLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>150</y>
+           <width>341</width>
+           <height>81</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>请先设计滤波器</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="featureLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>240</y>
+           <width>351</width>
+           <height>71</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>请先设计滤波器</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_5">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>41</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>类型</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="nameLabel">
+         <property name="geometry">
+          <rect>
+           <x>60</x>
+           <y>10</y>
+           <width>371</width>
+           <height>18</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>请先设计滤波器</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
